@@ -3,10 +3,17 @@
 from room import Room
 
 
-class Player(Room):
-    def __init__(self, name, room, description):
-        super().__init__(room, description)
+class Player():
+    def __init__(self, name, current_room, inventory=None):
         self.name = name
+        self.current_room = current_room
+        self.inventory = [] if inventory is None else inventory
 
     def __str__(self):
-        return 'Player: %s, your current room: %s. Room description: %s' % (self.name, self.room.room, self.description)
+        return 'Player: %s. %s' % (self.name, self.current_room)
+
+    def on_take(self, item):
+        self.inventory.append(item)
+
+    def on_drop(self, item):
+        self.inventory.remove(item)
