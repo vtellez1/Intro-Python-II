@@ -79,31 +79,24 @@ moves = input(
 
 while not moves == "q":
     # If player chooses action move
-    room_items = []
-
-
-# print(room_items)
     if len(moves.split()) == 2:
         handle_action = moves.split()
         if handle_action[0] == 'take':
-            if len(player1.current_room.items) > 0:
-                for item in player1.current_room.items:
-                    room_items.append(item.item_name)
-            else:
-                pass
+            chosenItem = items[handle_action[1]]
 
-            if handle_action[1] in room_items:
-                player1.on_take(handle_action[1])
-                # (player1.current_room).remove_item(handle_action[1])
-                print('You have picked up ' + handle_action[1])
+            if chosenItem in player1.current_room.items:
+                player1.on_take(chosenItem)
+                (player1.current_room).remove_item(chosenItem)
+                print('You have picked up ' + str(chosenItem))
             else:
                 print("Item not found.")
 
         elif handle_action[0] == 'drop':
-            if handle_action[1] in player1.inventory:
-                player1.current_room.add_item(handle_action[1])
-                player1.on_drop(handle_action[1])
-                print('Dropped ' + handle_action[1])
+            chosenItem = items[handle_action[1]]
+            if chosenItem in player1.inventory:
+                player1.current_room.add_item(chosenItem)
+                player1.on_drop(chosenItem)
+                print('Dropped ' + str(chosenItem))
             else:
                 print("Item could not be dropped.")
 
@@ -111,7 +104,7 @@ while not moves == "q":
     elif moves == 'i':
         print("Your inventory:")
         for item in player1.inventory:
-            print(player1.inventory)
+            print(item)
 
     # if player is OUTSIDE
     elif player1.current_room == room['outside']:
@@ -119,6 +112,9 @@ while not moves == "q":
         if moves == "n":
             player1.current_room = room['outside'].n_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         else:
             print('Sorry, cannot move that direction. Try again.')
 
@@ -128,14 +124,25 @@ while not moves == "q":
         if moves == "s":
             player1.current_room = room['foyer'].s_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
+
         # if player chooses north
         elif moves == "n":
             player1.current_room = room['foyer'].n_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
+
         # if player chooses east
         elif moves == "e":
             player1.current_room = room['foyer'].e_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         else:
             print('Sorry, cannot move that direction. Try again.')
 
@@ -145,6 +152,9 @@ while not moves == "q":
         if moves == "s":
             player1.current_room = room['overlook'].s_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         else:
             print('Sorry, cannot move that direction. Try again.')
 
@@ -154,10 +164,16 @@ while not moves == "q":
         if moves == "n":
             player1.current_room = room['narrow'].n_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         # if player chooses west
         elif moves == "w":
             player1.current_room = room['narrow'].w_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         else:
             print('Sorry, cannot move that direction. Try again.')
 
@@ -167,6 +183,9 @@ while not moves == "q":
         if moves == "s":
             player1.current_room = room['treasure'].s_to
             print(player1)
+            print("This Room's items: ")
+            for i in player1.current_room.items:
+                print(i)
         else:
             print('Sorry, cannot move that direction. Try again.')
 
